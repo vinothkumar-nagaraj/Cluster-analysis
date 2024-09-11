@@ -1,25 +1,27 @@
+import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Create a DataFrame with sample employee data
+# Create a sample data frame
 data = {
-    'Employee ID': [1, 2, 3, 4, 5],
-    'Name': ['John Doe', 'Jane Smith', 'Bob Johnson', 'Alice Williams', 'Chris Brown'],
-    'Department': ['Engineering', 'HR', 'Sales', 'Engineering', 'HR'],
-    'Salary': [70000, 60000, 75000, 80000, 55000]
+    'Category': ['A', 'B', 'C', 'D'],
+    'Values': [10, 20, 15, 25]
 }
-
 df = pd.DataFrame(data)
 
-# Plot Salary by Department
-plt.figure(figsize=(8, 6))
-df.groupby('Department')['Salary'].mean().plot(kind='bar', color='skyblue')
+# Streamlit app
+st.title('Streamlit Data Frame and Visualization')
 
-# Add labels and title
-plt.title('Average Salary by Department', fontsize=14)
-plt.xlabel('Department', fontsize=12)
-plt.ylabel('Average Salary ($)', fontsize=12)
+# Display the data frame
+st.write("Here's our data frame:")
+st.dataframe(df)
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(df['Category'], df['Values'], color='skyblue')
+ax.set_xlabel('Category')
+ax.set_ylabel('Values')
+ax.set_title('Bar Plot of Values by Category')
 
 # Display the plot
-plt.tight_layout()
-plt.show()
+st.pyplot(fig)
